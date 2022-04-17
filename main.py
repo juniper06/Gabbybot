@@ -3,8 +3,11 @@ import os
 
 from discord.ext import commands
 
-client = commands.Bot(command_prefix = "*",intents=discord.Intents.all(),
-    allowed_mentions=discord.AllowedMentions(roles=False, users=True, everyone=False),)
+client = commands.Bot(
+    command_prefix="*",
+    intents=discord.Intents.all(),
+    allowed_mentions=discord.AllowedMentions(roles=False, users=True, everyone=False),
+)
 
 
 for filename in os.listdir("cogs"):
@@ -12,8 +15,4 @@ for filename in os.listdir("cogs"):
         client.load_extension(f"cogs.{filename[:-3]}")
 
 
-
-client.run("OTY0MDcxOTc0NzUyMDkyMTgy.YlfT_g.wjXCRWiv-zaKnDWw2QJGvRrRE8o")
-
-
-
+client.run("OTYzODQ5NjY0NjQwMjAwNzU0.YlcE8w.pIX0gbv5QwA9MKipZvF5oi4Ne50")

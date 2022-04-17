@@ -1,6 +1,6 @@
-from asyncio import events
+
 import discord
-import random 
+import random
 from discord.ext import commands
 
 pictures = [
@@ -30,8 +30,9 @@ pictures = [
     "https://scontent.xx.fbcdn.net/v/t1.15752-9/274619320_5642047102495863_6722646736388214895_n.jpg?stp=dst-jpg_s851x315&_nc_cat=103&ccb=1-5&_nc_sid=aee45a&_nc_eui2=AeFjT3Ul-iFZdPjCKmo8zwqidrq41yauO4x2urjXJq47jDnDv9ImbqbJzvwoHEBtbo_a2P-EOf6Mo4fCnWozq6nZ&_nc_ohc=hinmOunpjAUAX9wbmn6&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AVJnljiuGW4stFJVusiDBIufTYuVUzvuiw5O7RRhnkD5rg&oe=627C5292",
     "https://scontent.xx.fbcdn.net/v/t1.15752-9/274608567_1027558291306718_5603830228202341328_n.jpg?stp=dst-jpg_s851x315&_nc_cat=103&ccb=1-5&_nc_sid=aee45a&_nc_eui2=AeGryYuGp-vOZmslyWNWHCLLu7b1i-OakAO7tvWL45qQA_0U6JVYluBJ5xYP72q5K8TQQ5wXyOxpQKxJ6dJgWYp_&_nc_ohc=bLeMs_xYknsAX94NlkK&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AVLIbzEg5L3k1wEPf3jr3LorA9zd2mtKObfx0heJhQ0n5A&oe=627CE9B0",
     "https://scontent.xx.fbcdn.net/v/t1.15752-9/274976867_956756524859443_1415015026014584107_n.jpg?stp=dst-jpg_s206x206&_nc_cat=105&ccb=1-5&_nc_sid=aee45a&_nc_eui2=AeEJVI4AgRGSGgnkXJq-3AkBW-psQgVc1Ptb6mxCBVzU-yCmFmvVrEqVe2btV41mVfGntUE3uACEzq6CzFyhzZOg&_nc_ohc=TQwSdG0yWuIAX8pGxWr&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AVL6eq57lV1aeMcghhMu8ee34ZKB9IpNAKuYiSwwUg3DJg&oe=6258C880",
-    "https://scontent.xx.fbcdn.net/v/t1.15752-9/274959204_996335167659538_480372284298685699_n.jpg?stp=dst-jpg_p206x206&_nc_cat=105&ccb=1-5&_nc_sid=aee45a&_nc_eui2=AeH0an6RWBPxWk-AD6BuZpZAE8Y-ixSS97MTxj6LFJL3s1xE1c9kBo2RU_s1Tc5pFHVq7ScFQvLlZJUG-guCHNyN&_nc_ohc=H3RmPtq5mvAAX_u-0AZ&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AVLWP5Aoqe8AdEF-ZmeLEK_TTjEEZg0HwCZD5e2FyxHa-g&oe=6258F57A"
+    "https://scontent.xx.fbcdn.net/v/t1.15752-9/274959204_996335167659538_480372284298685699_n.jpg?stp=dst-jpg_p206x206&_nc_cat=105&ccb=1-5&_nc_sid=aee45a&_nc_eui2=AeH0an6RWBPxWk-AD6BuZpZAE8Y-ixSS97MTxj6LFJL3s1xE1c9kBo2RU_s1Tc5pFHVq7ScFQvLlZJUG-guCHNyN&_nc_ohc=H3RmPtq5mvAAX_u-0AZ&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AVLWP5Aoqe8AdEF-ZmeLEK_TTjEEZg0HwCZD5e2FyxHa-g&oe=6258F57A",
 ]
+
 
 class Events(commands.Cog):
     def __init__(self, client):
@@ -39,17 +40,18 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print(f'{self.client.user} the bot has been activated!')
+        print(f"{self.client.user} the bot has been activated!")
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
         channel = member.guild.system_channel
         if channel is not None:
             embed = discord.Embed(title=f"Hi! {member.name}")
-            embed.add_field(name="Welcome to the Kulto de Morax ",
-                            value='Putang ina mo')
+            embed.add_field(
+                name="Welcome to the Kulto de Morax ", value="Putang ina mo"
+            )
             embed.set_image(url=random.choice(pictures))
-            embed.set_author(name = member.name,url=member.avatar_url)
+            embed.set_author(name=member.name, url=member.avatar_url)
             await channel.send(embed=embed)
 
     @commands.Cog.listener()
@@ -59,11 +61,13 @@ class Events(commands.Cog):
         if message.content.startswith("#include"):
             await message.delete()
             embed = discord.Embed(title="C or CPP code")
-            codes = '''```cpp\n{}\n```'''.format(message.content)
+            codes = """```cpp\n{}\n```""".format(message.content)
             embed.description = codes
-            embed.set_author(name=message.author.name, icon_url=message.author.avatar_url)
+            embed.set_author(
+                name=message.author.name, icon_url=message.author.avatar_url
+            )
             await message.channel.send(embed=embed)
-            
+
 
 def setup(client):
     client.add_cog(Events(client))
